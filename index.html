@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brumous (Zishan Akhtar) | Web Developer & Game Dev Learner</title>
+<meta name="description"
+content="Brumous is the portfolio of Zishan Akhtar, a web developer and game development learner building modern websites and interactive projects ,showcasing games and websites built and developed by Zishan Akhtar.">
+
+<meta property="og:title" content="Brumous – Web Developer & Creative Builder">
+<meta property="og:description"
+content="Brumous builds clean, fast, and aesthetic web experiences and explores game development using Godot.">
+<meta property="og:url" content="https://brumous.wuaze.com">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Brumous",
+  "alternateName": "Zishan Akhtar",
+  "url": "https://brumous.wuaze.com",
+  "jobTitle": "Web Developer",
+  "knowsAbout": ["HTML", "CSS", "JavaScript", "PHP", "Game Development", "Godot"],
+  "sameAs": [
+    "https://www.instagram.com/zishan_akhtar_1/"
+  ]
+}
+</script>
+<link rel="canonical" href="https://brumous.wuaze.com/">
+<meta name="robots" content="index, follow">
+    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        dark: {
+                            bg: '#0f172a', // Slate 900
+                            card: '#1e293b', // Slate 800
+                        },
+                        brand: {
+                            light: '#818cf8', // Indigo 400
+                            DEFAULT: '#6366f1', // Indigo 500
+                            dark: '#4f46e5', // Indigo 600
+                        },
+                        accent: {
+                            400: '#22d3ee', // Cyan
+                            500: '#8b5cf6', // Violet
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* --- Lens Blur Effect --- */
+        .lens-effect {
+            /* Light Mode: High saturation, slight transparency, strong blur */
+            background: rgba(255, 255, 255, 0.7); 
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            
+            /* Border and Shadow for depth */
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 
+                0 8px 32px 0 rgba(31, 38, 135, 0.1),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.2); 
+        }
+
+        /* Dark Mode Override */
+        html.dark .lens-effect {
+            background: rgba(15, 23, 42, 0.65); /* Darker tint */
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 
+                0 8px 32px 0 rgba(0, 0, 0, 0.3),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+        }
+
+        /* Text Gradient */
+        .text-gradient {
+            background: linear-gradient(to right, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        html:not(.dark) .text-gradient {
+            background: linear-gradient(to right, #4f46e5, #9333ea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #64748b; }
+
+        /* Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        html.dark .glass-panel {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        html:not(.dark) .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 dark:bg-slate-950 dark:text-gray-100 transition-colors duration-300 antialiased selection:bg-brand selection:text-white">
+<p class="sr-only">
+  Brumous is the personal portfolio website of Zishan Akhtar, a web developer and game development learner.
+</p>
+    <!-- LENS NAVBAR -->
+    <nav class="fixed z-50 top-6 left-1/2 -translate-x-1/2 w-[90%] max-w-6xl rounded-2xl lens-effect transition-all duration-300">
+        <div class="px-6 py-4 flex justify-between items-center relative">
+            
+            <!-- Logo -->
+            <a href="#home" class="text-xl font-bold font-mono tracking-tighter hover:text-brand transition-colors relative z-10 bg-clip-text text-transparent bg-gradient-to-r from-accent-400 to-accent-50">
+                &lt;Brumous/&gt;;
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                <a href="#about" class="hover:text-brand transition-colors">About</a>
+                <a href="#skills" class="hover:text-brand transition-colors">Skills</a>
+                <a href="#projects" class="hover:text-brand transition-colors">Projects</a>
+                <a href="#learning" class="hover:text-brand transition-colors">Learning</a>
+                <a href="#journey" class="hover:text-brand transition-colors">Journey</a>
+                <a href="#contact" class="hover:text-brand transition-colors">Contact</a>
+                
+                <!-- Theme Toggle Desktop -->
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors focus:outline-none">
+                    <i class="ph ph-moon text-xl hidden dark:block"></i>
+                    <i class="ph ph-sun text-xl block dark:hidden"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Controls (Right Side) -->
+            <div class="md:hidden flex items-center gap-3 relative z-10">
+                <!-- Theme Toggle Mobile -->
+                <button id="theme-toggle-mobile" class="py-1 px-2 flex items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
+                    <i class="ph ph-moon text-xl hidden dark:block"></i>
+                    <i class="ph ph-sun text-xl block dark:hidden"></i>
+                </button>
+                
+                <!-- Hamburger/Close Icon -->
+                <button id="mobile-menu-btn" class="text-2xl focus:outline-none p-1 w-8 h-8 flex items-center justify-center">
+                    <i class="ph ph-list transition-transform duration-300"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Menu Dropdown (The Animated Lens Panel) -->
+            <!-- Note: Anchored to the parent relative container -->
+            <div id="mobile-menu" class="absolute top-full right-0 mt-3 p-2 rounded-2xl lens-effect flex flex-col space-y-1 transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] origin-top-left opacity-0 scale-90 pointer-events-none transform translate-y-[-10px] shadow-2xl">
+                <a href="#about" class="mobile-link block px-4 py-3 rounded-xl hover:bg-black/5 dark:hover:bg-white/10 transition-colors text-sm font-medium">About</a>
+                <a href="#skills" class="mobile-link block px-4 py-3 rounded-xl hover:bg-black/5 dark:hover:bg-white/10 transition-colors text-sm font-medium">Skills</a>
+                <a href="#projects" class="mobile-link block px-4 py-3 rounded-xl hover:bg-black/5 dark:hover:bg-white/10 transition-colors text-sm font-medium">Projects</a>
+                <a href="#learning" class="mobile-link block px-4 py-3 rounded-xl hover:bg-black/5 dark:hover:bg-white/10 transition-colors text-sm font-medium">Learning</a>
+                <a href="#journey" class="mobile-link block px-4 py-3 rounded-xl hover:bg-black/5 dark:hover:bg-white/10 transition-colors text-sm font-medium">Journey</a>
+                <a href="#contact" class="mobile-link block px-4 py-3 rounded-xl hover:bg-black/5 dark:hover:bg-white/10 transition-colors text-sm font-medium">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex flex-col justify-center items-center px-6 pt-32 relative overflow-hidden">
+        <!-- Background Decor -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-brand/20 rounded-full blur-[128px] -z-10 animate-pulse"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-[128px] -z-10 animate-pulse delay-700"></div>
+
+        <div class="text-center max-w-3xl space-y-6 reveal active">
+            <span class="inline-block py-1 px-3 rounded-full bg-brand/10 text-brand font-mono text-sm border border-brand/20 mb-4">
+                Code. Create. Iterate.
+            </span>
+            <h1 class="text-5xl md:text-7xl font-bold tracking-tight">
+              Hi, I'm <span class="text-gradient">Zishan Akhtar</span>,
+              <span class="sr-only">Brumous – Web Developer & Creative Coder</span>
+            </h1>
+            
+            <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-400 font-light leading-relaxed">
+                I build clean, functional websites and I’m leveling up into <span class="text-gray-900 dark:text-gray-200 font-medium">game development</span>.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+                <a href="#projects" class="px-8 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-medium rounded-lg hover:bg-gray-800 dark:hover:bg-gray-100 transition-all transform hover:scale-105 shadow-lg shadow-brand/25">
+                    View Projects
+                </a>
+                <a href="#contact" class="px-8 py-3 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white font-medium rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800 transition-all">
+                    Contact Me
+                </a>
+            </div>
+        </div>
+
+        <div class="absolute bottom-10 animate-bounce">
+            <i class="ph ph-arrow-down text-2xl text-gray-400"></i>
+        </div>
+    </section>
+<main>
+  
+    <!-- About Section -->
+    <section id="about" class="py-24 px-6 bg-white dark:bg-slate-950">
+        <div class="max-w-4xl mx-auto reveal">
+            <h2 class="text-3xl font-bold mb-12 flex items-center gap-4">
+                <span class="text-brand font-mono text-xl">01.</span> About Me
+                <span class="h-px bg-gray-200 dark:bg-gray-800 flex-grow max-w-xs"></span>
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6 text-gray-600 dark:text-gray-400 leading-relaxed">
+                    <p>
+                        Hello! I’m Zishan Akhtar, a web developer and game development enthusiast working under the name Brumous. I enjoy creating things that live on the internet. My interest in web development started with a curiosity about how websites actually work, which tumbled into learning HTML & CSS and eventually building full backend logic.
+                    </p>
+                    <p>
+                        I'm not the loudest developer in the room, but I let my code speak for itself. I value <strong class="text-brand">minimalism</strong>, <strong class="text-brand">performance</strong>, and <strong class="text-brand">clean architecture</strong>.
+                    </p>
+                    <p>
+                        Recently, I've embarked on a new journey into Game Development using the <span class="text-gray-900 dark:text-gray-200 font-medium">Godot Engine</span>.
+                    </p>
+                </div>
+                
+                <div class="relative group">
+                    <div class="absolute -inset-2 bg-gradient-to-r from-brand to-purple-600 rounded-xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+                    <div class="relative p-6 bg-gray-50 dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-800">
+                        <h3 class="font-mono text-sm text-gray-500 mb-4">// Current Status</h3>
+                        <ul class="space-y-3 font-mono text-sm">
+                            <li class="flex items-center gap-3">
+                                <i class="ph-fill ph-check-circle text-green-500"></i>
+                                <span>Building responsive UIs</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="ph-fill ph-check-circle text-green-500"></i>
+                                <span>Refining Backend Logic (PHP)</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="ph-fill ph-lightning text-yellow-500"></i>
+                                <span>Learning GDScript (Godot)</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 px-6 bg-gray-50 dark:bg-[#0b1120]">
+        <div class="max-w-4xl mx-auto reveal">
+            <h2 class="text-3xl font-bold mb-12 flex items-center gap-4">
+                <span class="text-brand font-mono text-xl">02.</span> Skills
+                <span class="h-px bg-gray-200 dark:bg-gray-800 flex-grow max-w-xs"></span>
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Web Dev -->
+                <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800">
+                    <h3 class="text-xl font-semibold mb-6 flex items-center gap-2">
+                        <i class="ph ph-globe text-brand"></i> Web Development
+                    </h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2 bg-gray-100 dark:bg-slate-800 text-sm font-medium rounded-lg text-gray-700 dark:text-gray-300">HTML5</span>
+                        <span class="px-4 py-2 bg-gray-100 dark:bg-slate-800 text-sm font-medium rounded-lg text-gray-700 dark:text-gray-300">CSS3</span>
+                        <span class="px-4 py-2 bg-gray-100 dark:bg-slate-800 text-sm font-medium rounded-lg text-gray-700 dark:text-gray-300">JavaScript</span>
+                        <span class="px-4 py-2 bg-gray-100 dark:bg-slate-800 text-sm font-medium rounded-lg text-accent-400">PHP</span>
+                        <span class="px-4 py-2 bg-gray-100 dark:bg-slate-800 text-sm font-medium rounded-lg text-gray-700 dark:text-gray-300">Tailwind CSS</span>
+                    </div>
+                </div>
+
+                <!-- Game Dev -->
+                <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-20 h-20 bg-brand/10 rounded-bl-full -mr-10 -mt-10"></div>
+                    <h3 class="text-xl font-semibold mb-6 flex items-center gap-2">
+                        <i class="ph ph-game-controller text-brand"></i> Game Dev
+                    </h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2 bg-gray-100 dark:bg-slate-800 text-sm font-medium rounded-lg text-accent-500 border border-brand/20">Godot Engine</span>
+                        <span class="px-4 py-2 bg-gray-100 dark:bg-slate-800 text-sm font-medium rounded-lg text-accent-400">GDScript</span>
+                        <span class="px-4 py-2 bg-gray-100 dark:bg-slate-800 text-sm font-medium rounded-lg text-gray-700 dark:text-gray-300">Physics</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 px-6 bg-gray-50 dark:bg-[#0b1120]">
+        <div class="max-w-4xl mx-auto reveal">
+            <h2 class="text-3xl font-bold mb-12 flex items-center gap-3">
+                <span class="text-brand font-mono text-xl">03.</span> Featured Projects
+                <span class="h-px bg-gray-200 dark:bg-gray-800 flex-grow max-w-xs"></span>
+            </h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
+                
+                <!-- Project 1 -->
+                <div class="group glass-panel rounded-xl overflow-hidden hover:shadow-2xl hover:shadow-accent-400/10 transition-all duration-300 hover:-translate-y-2">
+                    <div class=" bg-slate-200 dark:bg-slate-800 relative flex items-center justify-center overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-purple-500/10 group-hover:opacity-100 transition-opacity">
+                          </div>
+                          <img src="images/pumpkinsage.png" alt="PumpkinSage website project built using HTML, CSS and JAVASCRIPT"
+                          loading="lazy">
+                        
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 group-hover:text-accent-400 transition-colors">PumpkinSage Portfolio</h3>
+                        <p class="text-sm text-slate-600 dark:text-slate-400 mb-4 h-12 line-clamp-2">
+                            A responsive portfolio website built using HTML, CSS, and JavaScript with a focus on performance and clean UI.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="text-xs font-mono text-accent-400">HTML</span>
+                            <span class="text-xs font-mono text-accent-400">CSS</span>
+                            <span class="text-xs font-mono text-accent-400">JS</span>
+                        </div>
+                        <div class="flex gap-4">
+                            <a href="https://pumpkinsage.great-site.net" class="text-sm font-medium hover:text-accent-400 flex items-center gap-1 transition-colors"><i data-lucide="external-link" class="w-4 h-4"></i> Site</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="group relative bg-white dark:bg-slate-900 rounded-2xl overflow-hidden border border-gray-200 dark:border-slate-800 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand/20 flex flex-col h-auto">
+                    
+                    <!-- Game Thumbnail / Banner area -->
+                    <div class=" bg-slate-800 relative overflow-hidden group-hover:opacity-100">
+                        <img src="images/princepersia.png" alt="">
+                        
+                        
+                        <!-- Overlay Gradient -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-transparent"></div>
+                        
+                        <!-- Version Badge -->
+                        <div class="absolute top-4 right-4 z-20">
+                            <span class="px-3 py-1 text-[10px] font-mono font-bold text-white bg-black/60 backdrop-blur-md border border-white/10 rounded-full shadow-lg">
+                                v1.0.2 Beta
+                            </span>
+                        </div>
+                
+                        <!-- Tech Icon Overlay -->
+                        <div class="absolute bottom-4 left-4 z-20 flex items-center gap-2">
+                            <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-[#478cbf] text-white shadow-lg" title="Made with Godot">
+                                <i class="ph-fill ph-robot text-lg"></i>
+                            </span>
+                        </div>
+                    </div>
+                
+                    <!-- Content -->
+                    <div class="p-6 flex flex-col flex-grow">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-brand transition-colors">
+                                    Prince Persia
+                                </h3>
+                                <p class="text-xs font-mono text-brand mt-1">Adventure / Physics</p>
+                            </div>
+                            
+                            <!-- Platform Availability Icons -->
+                            <div class="flex gap-2 text-gray-400 bg-gray-100 dark:bg-slate-800 py-1 px-2 rounded-lg border border-gray-200 dark:border-slate-700">
+                                <i class="ph-fill ph-windows-logo hover:text-blue-500 transition-colors" title="Windows"></i>
+                                <i class="ph-fill ph-linux-logo hover:text-yellow-500 transition-colors" title="Linux"></i>
+                                <i class="ph-fill ph-apple-logo hover:text-gray-900 dark:hover:text-white transition-colors" title="MacOS"></i>
+                            </div>
+                        </div>
+                
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-6 leading-relaxed line-clamp-3">
+                            A game full of adventure and exploration. Made with Passion & Excitement.
+                        </p>
+                
+                        <!-- Tech Stack Pills -->
+                        <div class="flex flex-wrap gap-2 mb-6 mt-auto">
+                            <span class="px-2 py-1 text-xs font-medium rounded-md bg-gray-100 dark:bg-slate-800 text-brand border border-gray-200 dark:border-slate-700">GDScript</span>
+                            <span class="px-2 py-1 text-xs font-medium rounded-md bg-gray-100 dark:bg-slate-800 text-accent-500 border border-gray-200 dark:border-slate-700">2D Lights</span>
+                        </div>
+                
+                        <!-- Action Area -->
+                        <div class="border-t border-gray-100 dark:border-slate-800 pt-4 mt-auto">
+                            <div class="flex items-center gap-3">
+                                <!-- Main Download Button -->
+                                <a href="#" class="flex-1 inline-flex justify-center items-center gap-2 px-4 py-2.5 bg-brand hover:bg-brand-dark text-white text-sm font-semibold rounded-xl transition-all shadow-lg shadow-brand/20 hover:shadow-brand/40 group/btn">
+                                    <i class="ph-bold ph-download-simple group-hover/btn:animate-bounce"></i>
+                                    <span>Download</span>
+                                </a>
+                                
+                                <!-- Source Code Link -->
+                                <a href="#" class=" inline-flex justify-center items-center w-11 h-11 bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700 text-gray-900 dark:text-white rounded-xl border border-gray-200 dark:border-slate-700 transition-all" title="View Source Code">
+                                    <i class="ph-bold ph-github-logo text-lg"></i>
+                                </a>
+                            </div>
+                            
+                            <!-- File Info -->
+                            <div class="flex justify-center items-center gap-3 mt-3 text-[10px] font-mono text-gray-400 uppercase tracking-wider">
+                                <span class="flex items-center gap-1"><i class="ph-fill ph-hard-drives"></i> 145 MB</span>
+                                <span class="w-1 h-1 rounded-full bg-gray-600"></span>
+                                <span>.ZIP Format</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    </section>
+    <!-- Learning -->
+    <section id="learning" class="py-24 px-6 bg-gray-50 dark:bg-[#0b1120]">
+        <div class="max-w-4xl mx-auto reveal">
+            <h2 class="text-3xl font-bold mb-12 flex items-center gap-4">
+                <span class="text-brand font-mono text-xl">04.</span> The Lab
+                <span class="h-px bg-gray-200 dark:bg-gray-800 flex-grow max-w-xs"></span>
+            </h2>
+
+            <div class="bg-gradient-to-br from-brand-dark to-slate-900 rounded-2xl p-8 md:p-12 text-white relative overflow-hidden shadow-2xl">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full blur-3xl -mr-20 -mt-20"></div>
+                <div class="relative z-10 flex flex-col md:flex-row items-center gap-8">
+                    <div class="flex-1 space-y-4">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-xs font-mono border border-white/20">
+                            <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                            Currently Learning
+                        </div>
+                        <h3 class="text-2xl font-bold">Exploring Godot Engine</h3>
+                        <p class="text-gray-300 font-light leading-relaxed">
+                            Web development taught me structure. Game development is teaching me interaction. I'm currently diving deep into Godot's node system.
+                        </p>
+                    </div>
+                    <div class="w-full md:w-1/3 flex justify-center">
+                        <div class="w-32 h-32 bg-white/10 rounded-xl backdrop-blur-md border border-white/20 flex items-center justify-center animate-float">
+                            <i class="ph ph-cube text-5xl text-brand-light"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+   <!-- Learning Journey -->
+    <section id="journey" class="py-24 px-6 bg-slate-100/50 dark:bg-white/5">
+            <div class="max-w-4xl mx-auto reveal">
+                 <h2 class="text-3xl font-bold mb-12 flex items-center gap-3">
+                    <span class="text-brand font-mono text-xl">05.</span> The Journey
+                    <span class="h-px bg-gray-200 dark:bg-gray-800 flex-grow max-w-xs"></span>
+                </h2>
+                
+                <div class="glass-panel p-8 rounded-2xl relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-8 opacity-10">
+                        <i data-lucide="compass" class="w-32 h-32 text-accent-400"></i>
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold mb-4">Leveling Up 🚀</h3>
+                    <p class="text-slate-600 dark:text-slate-300 mb-6 leading-relaxed max-w-2xl">
+                        I believe technology is a canvas. While I have a strong foundation in web technologies, I am actively learning <strong class="text-accent-400">Game Development</strong> to understand complex logic, physics, and interactive storytelling. 
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center shrink-0">
+                                <i data-lucide="code-2" class="w-5 h-5 text-accent-400"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Mastering the Web</h4>
+                                <p class="text-sm text-slate-500">Refining PHP backends & polishing UI/UX interactions.</p>
+                            </div>
+                        </div>
+                        <div class="h-8 w-0.5 bg-slate-300 dark:bg-slate-700 ml-6"></div>
+                         <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center shrink-0 border border-accent-500">
+                                <i data-lucide="joystick" class="w-5 h-5 text-accent-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-accent-500">Exploring Godot Engine</h4>
+                                <p class="text-sm text-slate-500">Building mechanics, learning GDScript, and designing levels.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    <!-- Contact Section -->
+    
+    <section id="contact" class="py-24 px-6">
+        <div class="max-w-xl mx-auto text-center">
+            <h2 class="text-4xl font-bold mb-6">Let's Build Something.</h2>
+            <p class="text-slate-600 dark:text-slate-400 mb-10">
+                Whether you have a question about a project, want to discuss game mechanics, or just want to say hi, my inbox is open.
+            </p>
+            
+            <a href="mailto:zishanakhtar9999@gmail.com" class="inline-flex items-center gap-3 px-8 py-4 bg-slate-900 dark:bg-white text-white dark:text-black font-bold rounded-xl hover:scale-105 transition-transform mb-12 shadow-xl shadow-accent-400/20">
+                <i data-lucide="mail" class="w-5 h-5"></i> Say Hello
+            </a>
+            
+            <div class="flex justify-center gap-6">
+                <a href="https://www.instagram.com/zishan_akhtar_1/" class="px-8 py-4 bg-slate-900 dark:bg-white text-white dark:text-black font-bold rounded-xl hover:scale-105 transition-transform mb-12 shadow-xl shadow-accent-400/20 flex gap-3" aria-label="Instagram">
+                    <i data-lucide="instagram" class="w-6 h-6"></i>
+                <span>Zishan Akhtar</span></a>
+            </div>
+        </div>
+    </section>
+</main>
+
+    <!-- Footer -->
+    <footer class="py-6 text-center text-sm font-mono text-gray-500 dark:text-slate-600 bg-white dark:bg-slate-950">
+        <p>Designed & Built by Brumous (Zishan Akhtar)</p>
+    </footer>
+
+    <!-- JavaScript logic -->
+    <script>
+      lucide.createIcons();
+        // --- Theme Toggle Logic ---
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeToggleMobileBtn = document.getElementById('theme-toggle-mobile');
+        
+        function setTheme(isDark) {
+            const html = document.documentElement;
+            if (isDark) {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+            setTheme(true);
+        } else {
+            setTheme(false);
+        }
+
+        [themeToggleBtn, themeToggleMobileBtn].forEach(btn => {
+            btn.addEventListener('click', () => {
+                const isDark = document.documentElement.classList.contains('dark');
+                setTheme(!isDark);
+            });
+        });
+
+        // --- Mobile Menu Logic (Updated) ---
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        const menuIcon = mobileMenuBtn.querySelector('i');
+        let isMenuOpen = false;
+
+        function toggleMenu() {
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {
+                // Open: Visible, Scaled Up, Interactive, Icon Change
+                mobileMenu.classList.remove('opacity-0', 'scale-90', 'pointer-events-none', 'translate-y-[-10px]');
+                mobileMenu.classList.add('opacity-100', 'scale-100', 'pointer-events-auto', 'translate-y-0');
+                
+                // Icon Animation
+                menuIcon.classList.remove('ph-list');
+                menuIcon.classList.add('ph-x');
+            } else {
+                // Closed: Invisible, Scaled Down, Non-interactive
+                mobileMenu.classList.remove('opacity-100', 'scale-100', 'pointer-events-auto', 'translate-y-0');
+                mobileMenu.classList.add('opacity-0', 'scale-90', 'pointer-events-none', 'translate-y-[-10px]');
+                
+                // Icon Animation
+                menuIcon.classList.remove('ph-x');
+                menuIcon.classList.add('ph-list');
+            }
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMenu);
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if(isMenuOpen) toggleMenu();
+            });
+        });
+
+        // Close when clicking outside
+        document.addEventListener('click', (e) => {
+            if (isMenuOpen && !mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                toggleMenu();
+            }
+        });
+
+        // --- Scroll Reveal Animation ---
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            const elementVisible = 150;
+            revealElements.forEach((reveal) => {
+                const elementTop = reveal.getBoundingClientRect().top;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveal.classList.add('active');
+                }
+            });
+        };
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll(); // Trigger once on load
+    </script>
+</body>
+</html>
+
